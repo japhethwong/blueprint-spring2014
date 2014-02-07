@@ -1,8 +1,8 @@
 package reddit;
-import java.util.Date;
+import java.util.*;
 
 public class User {
-  protected Article[] articles;
+  protected ArrayList<Article> articles;
   protected String username;
   protected Date dateCreated;
 
@@ -10,24 +10,17 @@ public class User {
 
 
   public User(String username){
+    this.articles = new ArrayList<Article>();
     this.username = username;
-    this.dateCreated = new Date()
+    this.dateCreated = new Date();
   }
 
-  public Article[] getArticles(){
-  }
-
-  public void postArticle(){
-  }
-
-  public void removeArticle(){
-  }
-
-  public void setUsername(){
+  public ArrayList<Article> getArticles(){
+    return this.articles;
   }
 
   public String getUsername(){
-
+    return this.username;
   }
   
 
