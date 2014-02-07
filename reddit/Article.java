@@ -1,44 +1,42 @@
 package reddit;
-import java.util.Date;
+import java.util.*;
 
 public class Article {
   protected User author;
-  protected ArrayList<Community> communities;
+  protected Community community;
   protected String content;
   protected int favorites;
   protected Date dateCreated;
-  protected int id;
-  protected static int currentId = 0;
+  protected String id;
   
-  public Article(User author, ArrayList<Community> communities, String content){
+  public Article(User author, Community community, String content){
     this.author = author;
-    this.communities = communities;
+    this.community = community;
     this.content = content;
     this.favorites = 0;
     this.dateCreated = new Date();
-    this.id = currentId;
-    currentId++;
+    this.id = (new Date()).toString() + String.valueOf((new Date()).getTime());
   }
 
-  public Article(User author, ArrayList<Community> communities, String content, int favorites, Date date, int id){
+  public Article(User author, Community community, String content, int favorites, Date date, String id){
     this.author = author;
-    this.communities = communities;
+    this.community = community;
     this.content = content;
     this.favorites = favorites;
     this.dateCreated = date;
     this.id = id;
   }
 
-  public int getId(){
+  public String getId(){
     return this.id;
   }
 
-  public User getAuthors(){
+  public User getAuthor(){
     return this.author;
   }
 
-  public ArrayList<Communities> getCommunities(){
-    return this.communities;
+  public Community getCommunity(){
+    return this.community;
   }
 
   public String getContent(){
@@ -52,5 +50,6 @@ public class Article {
   public void favorite(){
     this.favorites++;
   }
+
   
 }
