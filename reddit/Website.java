@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class Website {
 	
-	ArrayList<Community> communities;
-	HashMap<String, User> users;
-	ArrayList<Article> articles;
+	private HashMap<Community> communities;
+	private HashMap<String, User> users;
+	private ArrayList<Article> articles;
 	
     public Website () {
 
@@ -18,7 +18,7 @@ public class Website {
 	public String getArticles(){
 		StringBuffer sb = new StringBuffer();
 		for(int i = articles.size(); i > articles.size()-10; i--){
-			sb.append(articles.get(i).toString()+ "\n");
+			sb.append(i + ". " + articles.get(i).toString()+ "\n");
 		}
 		return sb.toString();
 	}
@@ -35,16 +35,34 @@ public class Website {
 		
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < userArticles.length; i++){
-			sb.append(i + ". " + aricles.get(i).toString()+ "\n");
+			sb.append(i + ". " + userArticles.get(i).toString()+ "\n");
 		}
 		return sb.toString();
 		
 	}
 
-	public String searchArticles(){
+	public String searchArticles(String community){
+		Community currentCommunity;
+		if(communities.contains(community)){
+			currentCommunity = communities.get(community);
+		}else{
+			return "Community Not Found";
+		}
+		//User class should implement getArticles()
+		Community[] communityArticles = currentCommunity.getArticles();
+		
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < communityArticles.length; i++){
+			sb.append(i + ". " + communityArticles.get(i).toString()+ "\n");
+		}
+		return sb.toString();
+		
 	}
 
-	public void postArticle(String content){
+	public void postArticle(String user, String content){
+		Date now = new Date();
+		Article article = new Article(user, content)
+		
 	}
 
 	public String getUsers(){
