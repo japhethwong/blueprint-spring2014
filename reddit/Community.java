@@ -17,6 +17,11 @@ public class Community {
     this.id = (new Date()).toString() + String.valueOf((new Date()).getTime());
   }
 
+  public Community(String id, String descr) {
+    this.id = id;
+    this.description = descr;
+  }
+
   public String getId(){
     return this.id;
   }
