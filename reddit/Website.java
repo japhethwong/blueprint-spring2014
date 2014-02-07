@@ -18,7 +18,7 @@ import reddit.Community;
 
 public class Website {
 	
-	private HashMap<Community> communities;
+	private HashMap<String, Community> communities;
 	private HashMap<String, User> users;
 	private ArrayList<Article> articles;
 	
@@ -69,7 +69,6 @@ public class Website {
 			sb.append(i + ". " + communityArticles.get(i).toString()+ "\n");
 		}
 		return sb.toString();
-		
 	}
 
 	public void postArticle(String user, ArrayList<Community> tags, String content){		
