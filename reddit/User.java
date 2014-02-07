@@ -1,11 +1,15 @@
-import java.util.Date
+package reddit;
+import java.util.Date;
 
 public class User {
   protected Article[] articles;
   protected String username;
   protected Date dateCreated;
 
-  public User(){
+
+  public User(String username){
+    this.username = username;
+    this.dateCreated = new Date()
   }
 
   public Article[] getArticles(){
