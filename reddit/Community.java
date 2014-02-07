@@ -1,19 +1,32 @@
+package reddit;
+
 public class Community {
-  protected Article[] articles;
+  protected ArrayList<Article> articles;
   protected String description;
-  protected User[] users;
+  protected ArrayList<User> users;
+  protected int id;
+  protected static int currentId = 0;
+
 
   public Community(){
+    this.id = currentId;
+    currentId++;
   }
 
-  public Article[] getArticles(){
+  public int getId(){
+    return this.id;
   }
 
-  public void addArticle(){
+  public ArrayList<Article> getArticles(){
+    return this.articles;
   }
 
-  public void removeArticle(){
+  public void addArticle(Article article){
+    this.articles.add(article);
+  }
 
+  public void removeArticle(Article article){
+    this.articles.remove(article);
   }
 
 }
