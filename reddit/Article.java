@@ -8,6 +8,8 @@ public class Article {
   protected int favorites;
   protected Date dateCreated;
   protected String id;
+
+  public static final int NUM_FIELDS = 6;
   
   public Article(User author, Community community, String content){
     this.author = author;

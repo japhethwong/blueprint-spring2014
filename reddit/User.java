@@ -6,6 +6,8 @@ public class User {
   protected String username;
   protected Date dateCreated;
 
+  public static final int NUM_FIELDS = 1;
+
 
   public User(String username){
     this.articles = new ArrayList<Article>();

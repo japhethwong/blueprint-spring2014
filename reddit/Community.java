@@ -7,6 +7,8 @@ public class Community {
   protected ArrayList<User> users;
   protected String id;
 
+  public static final int NUM_FIELDS = 2; // ID and description for now.
+
 
   public Community(String description){
     this.articles = new ArrayList<Article>();
