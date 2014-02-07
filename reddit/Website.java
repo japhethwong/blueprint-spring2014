@@ -9,6 +9,11 @@ import java.io.IOException;
 import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.CSVWriter;
 
+// Import data models.
+import reddit.User;
+import reddit.Article;
+import reddit.Community;
+
 public class Website {
 	
 	private HashMap<Community> communities;
@@ -76,6 +81,19 @@ public class Website {
         
     }
 
+    private ArrayList<User> populateUserData(List data) {
+        if (data.size() % User.NUM_FIELDS != 0) {
+            return null;
+        }
+
+        ArrayList<User> users = new ArrayList<User>();  // For now only going to create user by username.
+        for (int i = 0; i < users.length; i += User.NUM_FIELDS) {
+            User currUser = new User(users[i]);
+            users.add(currUser);
+        }
+        return users;
+    }
+
     /**
      *  populateArticleData() reads in the CSV data and recreates all Article objects.
      *  @param data is a List of Strings which are expected to correspond to the fields 
@@ -102,6 +120,18 @@ public class Website {
 
         return articles;
     }
+
+    private ArrayList<Community> populateCommunityData(List data) {
+        ArrayList<Community> communities = new ArrayList<Community>();
+        for (int i = 0; i < data.length; i += Community.NUM_FIELDS) {
+            int commId = Integer.parseInt(data[i]);
+            String descr = data[i+1];
+            Community commObj = new Community(commId, descr);
+            communities.add(commObj);
+        }
+
+        return communities;
+    } 
 
     /**
      *  importData() imports data from a file into the program's memory for use.
@@ -139,6 +169,15 @@ public class Website {
         }
 
         //  Populate the data.
+        ArrayList<User> usersList = populateUserData(userData);
+        for (User user : usersList) {
+            users.add(user.getUsername(), user);
+        }
+
+        // Populate communities.
+        communities = populateCommunityData(communityData);
+
+        // Populate articles.
         articles = populateArticleData(articleData);
 
 

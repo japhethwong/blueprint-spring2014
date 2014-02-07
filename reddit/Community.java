@@ -7,6 +7,8 @@ public class Community {
   protected int id;
   protected static int currentId = 0;
 
+  public static final int NUM_FIELDS = 2; // ID and description for now.
+
 
   public Community(){
     this.id = currentId;
