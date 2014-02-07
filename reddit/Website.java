@@ -35,10 +35,10 @@ public class Website {
 			return "User Not Found";
 		}
 		//User class should implement getArticles()
-		Article[] userArticles = currentUser.getArticles();
+		ArrayList<Article> userArticles = currentUser.getArticles();
 		
 		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < userArticles.length; i++){
+		for(int i = 0; i < userArticles.size(); i++){
 			sb.append(i + ". " + userArticles.get(i).toString()+ "\n");
 		}
 		return sb.toString();
@@ -53,10 +53,10 @@ public class Website {
 			return "Community Not Found";
 		}
 		//User class should implement getArticles()
-		Community[] communityArticles = currentCommunity.getArticles();
+		ArrayList<Community> communityArticles = currentCommunity.getArticles();
 		
 		StringBuffer sb = new StringBuffer();
-		for(int i = 0; i < communityArticles.length; i++){
+		for(int i = 0; i < communityArticles.size(); i++){
 			sb.append(i + ". " + communityArticles.get(i).toString()+ "\n");
 		}
 		return sb.toString();
@@ -64,15 +64,22 @@ public class Website {
 	}
 
 	public void postArticle(String user, String content){
-		Date now = new Date();
-		Article article = new Article(user, content)
+		ArrayList<Community> tags = new ArrayList<Community>();
+		
+		Article article = new Article(user, tags, content);
 		
 	}
 
 	public String getUsers(){
+		StringBuffer sb = new StringBuffer();
+		ArrayList<User> allUsers = users.values();
+		for(int i = 0; i < allUsers.size(); i++){
+			sb.append(i + ". " + allUsers.get(i).getUserame();
+		}
 	}
 
     public static void main(String[] args) {
+    	
         
     }
 
