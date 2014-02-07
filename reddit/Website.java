@@ -75,7 +75,7 @@ public class Website {
 		return sb.toString();
 	}
 
-	public void postArticle(String user, ArrayList<Community> tags, String content){		
+	public void postArticle(String user, Community tags, String content){		
 		Article article = new Article(user, tags, content);
 	}
 
@@ -115,30 +115,31 @@ public class Website {
     			}
     			break;
     		case "post":
-    			if(args.length >= 3){
+    			if(args.length >= 4){
+    				postArticle(args[1], args[2], args[3]);
     				//args[1] contains the username
-    				ArrayList<Community> tags = new ArrayList<Community>();
-    				System.out.print("Enter a tag (enter empty tag to exit): ");
-    				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    				String tag = null;
-    			    try {
-    			         tag = br.readLine();
-    			         while(tag != null){
-    			        	 if(tag.length() == 0){
-    			        		 break;
-    			        	 }
-	    			         if(communities.contains(tag)){
-	    			        	 tags.add(communities.get(tag));
-	    			         }else{
-	    			        	 System.out.println("Community does not exists.");
-	    			        	 System.out.print("Enter a tag: ");
-	    			         }
-	    			         tag = br.readLine();
-    			         }
-    			    } catch (IOException ioe) {
-    			         System.out.println("IO error trying to read your name!");
-    			    }
+//    				ArrayList<Community> tags = new ArrayList<Community>();
+//    				System.out.print("Enter a tag (enter empty tag to exit): ");
+//    				BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//
+//    				String tag = null;
+//    			    try {
+//    			         tag = br.readLine();
+//    			         while(tag != null){
+//    			        	 if(tag.length() == 0){
+//    			        		 break;
+//    			        	 }
+//	    			         if(communities.contains(tag)){
+//	    			        	 tags.add(communities.get(tag));
+//	    			         }else{
+//	    			        	 System.out.println("Community does not exists.");
+//	    			        	 System.out.print("Enter a tag: ");
+//	    			         }
+//	    			         tag = br.readLine();
+//    			         }
+//    			    } catch (IOException ioe) {
+//    			         System.out.println("IO error trying to read your name!");
+//    			    }
     			}else{
     				System.out.println(ERROR);
     			}
