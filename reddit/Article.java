@@ -6,6 +6,8 @@ public class Article {
   protected String content;
   protected int favorites;
   protected Date dateCreated;
+
+  public static final int NUM_FIELDS = 6;
   
   public Article(){
   }

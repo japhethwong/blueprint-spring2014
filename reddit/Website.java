@@ -59,6 +59,33 @@ public class Website {
     }
 
     /**
+     *  populateArticleData() reads in the CSV data and recreates all Article objects.
+     *  @param data is a List of Strings which are expected to correspond to the fields 
+     *   for an article
+     *  @return list of Article objects
+     **/
+    private ArrayList<Article> populateArticleData(List data) {
+        if (data.size() % Article.NUM_FIELDS != 0) {
+            return null;
+        }
+
+        ArrayList<Article> articles = new ArrayList<Article>();
+        for (int i = 0; i < data.length; i += Article.NUM_FIELDS) {
+            String articleId = data[i];
+            User user = users.get(data[i+1]);
+            String communityId = data[i+2];
+            String content = data[i+3];
+            int favorites = Integer.parseInt(data[i+4]);
+            Date date = DateFormat.parse(data[i+5]);
+
+            Article articleObj = new Article(articleId, user, communityId, content, favorites, date);
+            articles.add(articleObj);
+        }
+
+        return articles;
+    }
+
+    /**
      *  importData() imports data from a file into the program's memory for use.
      **/
     private void importData() {
@@ -69,7 +96,7 @@ public class Website {
         //  Read in article data.
         try {
             CSVReader articlesReader = new CSVReader(new FileReader(articlesLoc));
-            List articles = articlesReader.readAll();
+            List articleData = articlesReader.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
             System.exit(1);
@@ -78,7 +105,7 @@ public class Website {
         //  Read in user data.
         try {
             CSVReader usersReader = new CSVReader(new FileReader(usersLoc));
-            List users = usersReader.readAll();
+            List userData = usersReader.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
             System.exit(1);   
@@ -87,11 +114,14 @@ public class Website {
         //  Read in communities data.
         try {
             CSVReader communitiesReader = new CSVReader(new FileReader(communityLoc));
-            List communities = communities.readAll();
+            List communityData = communities.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
             System.exit(1);
         }
+
+        //  Populate the data.
+        articles = populateArticleData(articleData);
 
 
     }
