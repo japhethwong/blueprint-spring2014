@@ -7,8 +7,8 @@ public class Article {
   protected String content;
   protected int favorites;
   protected Date dateCreated;
-  protected int id;
-  protected static int currentId = 0;
+
+  public static final int NUM_FIELDS = 6;
   
   public Article(User author, ArrayList<Community> communities, String content){
     this.author = author;
