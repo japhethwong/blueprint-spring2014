@@ -21,6 +21,10 @@ public class Website {
 	private HashMap<String, Community> communities;
 	private HashMap<String, User> users;
 	private ArrayList<Article> articles;
+
+    private static final String articlesLoc = "articles.csv";
+    private static final String usersLoc = "users.csv";
+    private static final String communityLoc = "communities.csv";
 	
 	private final String ERROR = "INVALID COMMAND";
 	
@@ -203,13 +207,10 @@ public class Website {
      *  importData() imports data from a file into the program's memory for use.
      **/
     private void importData() {
-        String articlesLoc = "articles.csv";
-        String usersLoc = "users.csv";
-        String communityLoc = "communities.csv";
 
         //  Read in article data.
         try {
-            CSVReader articlesReader = new CSVReader(new FileReader(articlesLoc));
+            CSVReader articlesReader = new CSVReader(new FileReader(Website.articlesLoc));
             List articleData = articlesReader.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
@@ -218,7 +219,7 @@ public class Website {
         
         //  Read in user data.
         try {
-            CSVReader usersReader = new CSVReader(new FileReader(usersLoc));
+            CSVReader usersReader = new CSVReader(new FileReader(Website.usersLoc));
             List userData = usersReader.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
@@ -227,7 +228,7 @@ public class Website {
 
         //  Read in communities data.
         try {
-            CSVReader communitiesReader = new CSVReader(new FileReader(communityLoc));
+            CSVReader communitiesReader = new CSVReader(new FileReader(Website.communityLoc));
             List communityData = communities.readAll();
         } catch (IOException e) {
             System.out.println("***ERROR: Unable to locate articles data file.");
@@ -241,11 +242,13 @@ public class Website {
         }
 
         // Populate communities.
-        communities = populateCommunityData(communityData);
+        communitiesList = populateCommunityData(communityData);
+        for (Community comm : communitiesList) {
+            communities.add(comm.getId(), comm);
+        }
 
         // Populate articles.
         articles = populateArticleData(articleData);
-
 
     }
 
@@ -254,7 +257,9 @@ public class Website {
      *  in for the next session.
      **/
     private void exportData() {
-
+        FileWriter artWriter = new FileWriter(Website.articlesLoc);
+        FileWriter commWriter = new FileWriter(Website.communityLoc);
+        FileWriter userWriter = new FileWriter(Website.usersLoc);
     }
 
 }
